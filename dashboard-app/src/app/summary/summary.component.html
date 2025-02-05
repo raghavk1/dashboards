@@ -1,0 +1,22 @@
+<div class="summary">
+    <h2>RFQ Summary</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>States</th>
+          <th *ngFor="let state of states">{{ state }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>RFQ Count</td>
+          <td *ngFor="let state of states">
+            <div class="count-card" (click)="goToDetails(state)">
+              {{ getCountsForState(state) }}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

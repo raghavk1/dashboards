@@ -1,0 +1,37 @@
+<div class="dashboard">
+    <!-- Toggle Button -->
+    <div class="button-container">
+      <button (click)="toggleLastStateOnly = !toggleLastStateOnly">
+        {{ toggleLastStateOnly ? 'Show All States' : 'Show Last State Only' }}
+      </button>
+    </div>
+  
+    <table>
+      <!-- Table Header -->
+      <thead>
+        <tr>
+          <th></th>
+          <th *ngFor="let state of states">{{ state }}</th>
+        </tr>
+      </thead>
+  
+      <!-- Table Body -->
+      <tbody>
+        <tr *ngFor="let rfqId of rfqIds">
+          <td>{{ rfqId }}</td>
+          <td *ngFor="let state of states">
+            <div *ngIf="shouldShowRfq(rfqId, state)">
+              <app-card
+                *ngFor="let rfq of getRfqsForStateAndId(rfqId, state)"
+                [details]="rfq.details"
+                [state]="rfq.state"
+                [assigned_to]="rfq.assigned_to"
+                class="card">
+              </app-card>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

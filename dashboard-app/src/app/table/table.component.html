@@ -1,0 +1,116 @@
+<!-- <h3>Selected Items:</h3>
+{{ selectedItems | json }}
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Categories</th>
+        <th *ngFor="let region of regions" [attr.colspan]="region.countries.length">{{ region.region }}</th>
+      </tr>
+      <tr>
+        <th></th>
+        <ng-container *ngFor="let region of regions">
+          <th *ngFor="let country of region.countries">{{ country.name }}</th>
+        </ng-container>
+      </tr>
+    </thead>
+
+    <tbody>
+      <ng-container *ngFor="let category of getAllCategories(); let rowIndex = index">
+        <tr>
+          <td>{{ category }}</td>
+          <ng-container *ngFor="let region of regions">
+            <td *ngFor="let country of region.countries; let colIndex = index" class="input-td">
+              <input
+                type="checkbox"
+                [formControl]="getRowControl(rowIndex, colIndex)"
+                (change)="updateChkbox($event, country.name, region.region, category)"
+              />
+            </td>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <button type="submit">Submit</button>
+</form> -->
+
+<!-- <form>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Capabilities Details</th>
+        <th *ngFor="let region of mappingRegions" [attr.colspan]="region.countries.length">{{ region.region }}</th>
+      </tr>
+      <tr>
+        <th></th>
+        <ng-container *ngFor="let region of mappingRegions">
+          <th *ngFor="let country of region.countries">{{ country.name }}</th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let category of getAllCategories(); let rowIndex = index">
+        <tr>
+          <td>
+            <span (click)="toggleCategory(rowIndex)">
+              <span *ngIf="category.subCategory?.length">{{ categoryVisibility[rowIndex] ? '▼' : '▶' }}</span>
+              {{ category.name }}
+            </span>
+          </td>
+          <ng-container *ngFor="let region of mappingRegions">
+            <td *ngFor="let country of region.countries">
+              <input
+                type="checkbox"
+                [checked]="isChecked(region, country, category)"
+                (change)="changeBox(region, category, country, $event)"
+              />
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="category.subCategory?.length && categoryVisibility[rowIndex]">
+          <tr *ngFor="let subcat of category.subCategory">
+            <td>{{ subcat.name }}</td>
+            <ng-container *ngFor="let region of mappingRegions">
+              <td *ngFor="let country of region.countries">
+                <input
+                  type="checkbox"
+                  [checked]="isChecked(region, country, subcat)"
+                  (change)="changeBox(region, subcat, country, $event)"
+                />
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+</form> -->
+
+<!-- <pre>{{ payloadRegion | json }}</pre> -->
+
+<mat-form-field appearance="outline">
+  <mat-label>Search</mat-label>
+  <!-- Autocomplete input for search -->
+  <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto" placeholder="Search">
+  </mat-form-field>
+   
+  <!-- Autocomplete dropdown with single-select radio button options -->
+  <mat-autocomplete #auto="matAutocomplete">
+  <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+  <!-- Radio button reflecting single selection -->
+  <mat-radio-button [checked]="selectedUser === user" (change)="selectUser(user)">
+  <div class="user-info">
+  <div class="name">{{ user.name }}</div>
+  <div class="email">{{ user.email }}</div>
+  </div>
+  </mat-radio-button>
+  </mat-option>
+  </mat-autocomplete>
+   
+  <!-- Action buttons at the bottom -->
+  <div class="actions">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="warn" (click)="assign()">Assign</button>
+  </div>

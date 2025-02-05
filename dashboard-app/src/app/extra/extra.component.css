@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  td.input-td{
+   text-align: center; 
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    /* text-align: center; */
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  

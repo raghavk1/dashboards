@@ -1,0 +1,61 @@
+   <div>
+    <h3>Selected Capabilities and Countries:</h3>
+    <ul>
+      <li *ngFor="let item of getSelectedItems()">
+        {{ item.capability }}: {{ item.country }}
+      </li>
+    </ul>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Capabilities Details</th>
+        <th *ngFor="let country of countries">{{ country.name }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let capability of data">
+        <tr>
+          <td>
+            <button *ngIf="capability.subCapabilities" (click)="toggleExpand(capability, $event)">
+              {{ capability.expanded ? '▼' : '▶' }}
+            </button>
+            {{ capability.name }}
+          </td>
+          <td *ngFor="let country of capability.countries" class="input-td">
+            <input type="checkbox" [(ngModel)]="country.selected"  (change)="onCheckboxChange($event, country)">
+          </td>
+        </tr>
+  
+        <ng-container *ngIf="capability.expanded">
+          <ng-container *ngFor="let subCapability of capability.subCapabilities">
+            <tr>
+              <td style="padding-left: 20px;">
+                <button *ngIf="subCapability.subCapabilities" (click)="toggleExpand(subCapability, $event)">
+                  {{ subCapability.expanded ? '▼' : '▶' }}
+                </button>
+                {{ subCapability.name }}
+              </td>
+              <td *ngFor="let country of subCapability.countries" class="input-td">
+                <input type="checkbox" [(ngModel)]="country.selected"  (change)="onCheckboxChange($event, country)">
+              </td>
+            </tr>
+  
+            <ng-container *ngIf="subCapability.expanded">
+              <ng-container *ngFor="let nestedCapability of subCapability.subCapabilities">
+                <tr>
+                  <td style="padding-left: 40px;">{{ nestedCapability.name }}</td>
+                  <td *ngFor="let country of nestedCapability.countries" class="input-td">
+                    <input type="checkbox" [(ngModel)]="country.selected"  (change)="onCheckboxChange($event, country)">
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+
+  
+  

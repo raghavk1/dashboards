@@ -1,0 +1,27 @@
+
+<section class="example-container mat-elevation-z8" tabindex="0">
+  <table mat-table [dataSource]="dataSource">
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name" sticky >
+      <th mat-header-cell *matHeaderCellDef class="fixedCols"> Name </th>
+      <td mat-cell *matCellDef="let element" class="fixedCols"> {{ element.Name }} </td>
+    </ng-container>
+
+    <ng-container
+    *ngFor="let column of displayedColumns.slice(1, displayedColumns.length - 1)"
+    [matColumnDef]="column"
+  >
+    <th mat-header-cell *matHeaderCellDef class="fixedCols"> {{ column }} </th>
+    <td mat-cell *matCellDef="let element"> {{ element[column] || '' }} </td>
+  </ng-container>
+
+    <!-- Star Column -->
+    <ng-container matColumnDef="Grand Total" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef class="fixedCols"> Grand Total </th>
+      <td mat-cell *matCellDef="let element" class="fixedCols"> {{ element['Grand Total'] }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</section>
